@@ -118,6 +118,28 @@ map = new ol.Map({
 	controls: ol.control.defaults({attribution: true}).extend([attribution]),
 	//overlays: [overlay],
 	layers: [Basmemap,
+  new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
+				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_Topoimi_PT/MapServer',
+			}),
+		name: 'World Label',
+		LegenUrl:'',
+		LegentType :'ESRI',
+		InfoPopup : false,
+		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
+		visible: true
+	 }),
+	 new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
+				url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
+				}),
+			name: 'Trasportation',
+			LegenUrl: '',
+			LegentType :'ESRI',
+			InfoPopup : false,
+			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
+			visible: true
+	 })
 		new  ol.layer.Tile({
 			source: new ol.source.TileArcGISRest({
 				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_Formasi_Ekoregion_DAS_Barito_AR_250K/MapServer',
