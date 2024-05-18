@@ -105,14 +105,14 @@ Basemap = new ol.layer.Tile({
       nama : "Basemap"
     })
 
-//var map = new ol.Map({
-// layers: [Basemap],
-//  target: 'map',
-//  view: new ol.View({
-//    center: ol.proj.fromLonLat([120.84404, -2.433331]),
-//    zoom: 5,
- // }),
-//});
+var map = new ol.Map({
+ layers: [Basemap],
+  target: 'map',
+  view: new ol.View({
+    center: ol.proj.fromLonLat([120.84404, -2.433331]),
+    zoom: 5,
+  }),
+});
 
 map = new ol.Map({
 	controls: ol.control.defaults({attribution: true}).extend([attribution]),
