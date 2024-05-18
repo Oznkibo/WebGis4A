@@ -120,6 +120,28 @@ map = new ol.Map({
 	layers: [Basmemap,
   new  ol.layer.Tile({
 			source: new ol.source.TileArcGISRest({
+				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_BANJIR_2021_PT_50K/MapServer',
+			}),
+		name: 'World Label',
+		LegenUrl:'',
+		LegentType :'ESRI',
+		InfoPopup : false,
+		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
+		visible: true
+	 }),
+	 new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
+				url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
+				}),
+			name: 'Trasportation',
+			LegenUrl: '',
+			LegentType :'ESRI',
+			InfoPopup : false,
+			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
+			visible: true
+	 })
+  new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
 				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/Kalsle_Kerentanan_Bencana/MapServer',
 			}),
 		name: 'World Label',
