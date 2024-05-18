@@ -99,6 +99,12 @@ dragElement(document.getElementById("BoxBasemap"));
 
 //global variabel
 var Basemap;
+var Group =  ol.layer.LayerGroup;
+var marking = false;
+var coordinates;
+var layerP;
+var BasmemapLayer;
+var map;
 
 Basemap = new ol.layer.Tile({
       source: new ol.source.OSM(),
@@ -106,18 +112,42 @@ Basemap = new ol.layer.Tile({
     })
 
 var map = new ol.Map({
- layers: [Basemap],
-  target: 'map',
-  view: new ol.View({
-    center: ol.proj.fromLonLat([120.84404, -2.433331]),
-    zoom: 5,
-  }),
-});
-
-map = new ol.Map({
-	controls: ol.control.defaults({attribution: true}).extend([attribution]),
-	//overlays: [overlay],
-	layers: [Basmemap,
+  layers: [Basemap,
+  
+  new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
+				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_JALAN_PROVINSI/MapServer',
+			}),
+		name: 'World Label',
+		LegenUrl:'',
+		LegentType :'ESRI',
+		InfoPopup : false,
+		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
+		visible: true
+	 }),
+	 new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
+				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_Topoimi_PT/MapServer',
+				}),
+			name: 'Trasportation',
+			LegenUrl: '',
+			LegentType :'ESRI',
+			InfoPopup : false,
+			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
+			visible: true
+	 }),
+  new  ol.layer.Tile({
+			source: new ol.source.TileArcGISRest({
+				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_Formasi_Ekoregion_DAS_Barito_AR_250K/MapServer',
+			}),
+		name: 'World Label',
+		LegenUrl:'',
+		LegentType :'ESRI',
+		InfoPopup : false,
+		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
+		visible: true
+	 }),
+	 
   new  ol.layer.Tile({
 			source: new ol.source.TileArcGISRest({
 				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_BANJIR_2021_PT_50K/MapServer',
@@ -140,79 +170,13 @@ map = new ol.Map({
 			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
 			visible: true
 	 })
-  new  ol.layer.Tile({
-			source: new ol.source.TileArcGISRest({
-				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/Kalsle_Kerentanan_Bencana/MapServer',
-			}),
-		name: 'World Label',
-		LegenUrl:'',
-		LegentType :'ESRI',
-		InfoPopup : false,
-		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
-		visible: true
-	 }),
-	 new  ol.layer.Tile({
-			source: new ol.source.TileArcGISRest({
-				url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
-				}),
-			name: 'Trasportation',
-			LegenUrl: '',
-			LegentType :'ESRI',
-			InfoPopup : false,
-			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
-			visible: true
-	 })
-  new  ol.layer.Tile({
-			source: new ol.source.TileArcGISRest({
-				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_Topoimi_PT/MapServer',
-			}),
-		name: 'World Label',
-		LegenUrl:'',
-		LegentType :'ESRI',
-		InfoPopup : false,
-		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
-		visible: true
-	 }),
-	 new  ol.layer.Tile({
-			source: new ol.source.TileArcGISRest({
-				url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
-				}),
-			name: 'Trasportation',
-			LegenUrl: '',
-			LegentType :'ESRI',
-			InfoPopup : false,
-			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
-			visible: true
-	 })
-		new  ol.layer.Tile({
-			source: new ol.source.TileArcGISRest({
-				url: 'https://geoportal.kalselprov.go.id/arcgis/rest/services/Kalsel/KALSEL_Formasi_Ekoregion_DAS_Barito_AR_250K/MapServer',
-			}),
-		name: 'World Label',
-		LegenUrl:'',
-		LegentType :'ESRI',
-		InfoPopup : false,
-		metadata : 'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/info/iteminfo',
-		visible: true
-	 }),
-	 new  ol.layer.Tile({
-			source: new ol.source.TileArcGISRest({
-				url: 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer',
-				}),
-			name: 'Trasportation',
-			LegenUrl: '',
-			LegentType :'ESRI',
-			InfoPopup : false,
-			metadata : 'http://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer/info/iteminfo',
-			visible: true
-	 })
-	 ],
-	target: 'map',
-	view: new ol.View({
-		center: ol.proj.fromLonLat([115.32424, -2.2323177]),
-		zoom:6
-	})
-}); 
+  ],
+  target: 'map',
+  view: new ol.View({
+    center: ol.proj.fromLonLat([120.84404, -2.433331]),
+    zoom: 5,
+  }),
+});
 
 function UpdateBaseMap(u,t,p){
   if(t== "ESRI"){
